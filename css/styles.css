@@ -471,9 +471,10 @@ img {
 
 .overlay {
   padding: 8px;
-  background-color: #3f51b5;
+  background-color: #4d5ae5;
   color: #fff;
-  font-family: sans-serif;
+  font-family: "Roboto"sans-serif;
+  font-size: 16px;
   position: absolute;
   top: 0;
   left: 0;
@@ -509,24 +510,38 @@ img {
 
 /* Bitiş */
 .footer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   background-color: #2e2f42;
-  padding: 48px 0;
+  margin: 0 auto;
+  padding: 50px 0;
 }
 
 .footer .container {
   max-width: 1158px;
   margin: 0 auto;
   padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 40px;
 }
 
 .footer-logo {
+  position: absolute;
   font-family: "Raleway", sans-serif;
   font-size: 18px;
   text-decoration: none;
   color: #ffffff;
-  display: inline-block;
+  display: block;
   margin: 0 auto;
-  margin-top: auto;
+  margin-top: 0;
+  left: 195px;
+  transform: translateX(-50%);
 }
 
 .footer-web {
@@ -535,20 +550,29 @@ img {
 }
 
 .footer p {
+  max-width: 250px;
   font-size: 14px;
   line-height: 1.6;
   color: #ffffff;
-  margin-top: 20px;
-  left: 10px;
+  margin-top: 50px;
+  left: 156px;
+}
+.footer-row {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 48px;
+  flex-wrap: wrap;
 }
 
 .icon-end {
   position: relative;
-  bottom: 50px;
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   gap: 20px;
-  align-items: left;
+  align-items: flex-start;
 }
 
 .icon-overlay {
@@ -557,8 +581,8 @@ img {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 500;
   pointer-events: none;
   padding: 8px 16px;
   border-radius: 8px;
@@ -606,28 +630,40 @@ img {
 }
 
 .footer-content {
+  flex: 1;
+  min-width: 260px;
   position: relative;
   width: 100%;
   margin: 0 auto;
 }
 
 .footer-section {
-  position: absolute;
-  bottom: 60px;
-  right: 120px;
+  position: relative;
   display: flex;
+  justify-content: center;
   flex-direction: column;
+  margin-top: 50px;
+  gap: 10px;
   align-items: flex-start;
-  gap: 12px;
+  margin-left: 0;
+  padding-left: 4px;
+  flex-wrap: wrap;
 }
 
-.footer-section h3 {
-  font-size: 24px;
-  color: #ffffff;
-  font-weight: 700;
-  margin: 0;
-  margin-bottom: 8px;
-  text-align: left;
+.footer-title {
+  position: absolute;
+  bottom: 100%;
+  left: 40px;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  pointer-events: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  white-space: nowrap;
+  user-select: none;
+  z-index: 10;
 }
 
 .subscribe-form {
@@ -663,8 +699,6 @@ img {
 .subscribe-button:hover {
   background-color: rgba(49, 208, 170, 1);
 }
-
-
 /*FORM-MODAL */
 .modal-toggle {
   display: none;
