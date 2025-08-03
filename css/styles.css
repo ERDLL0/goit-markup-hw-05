@@ -24,11 +24,11 @@ section {
 }
 
 .container {
-  max-width: 1158px;
+  max-width: 320px;
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  padding: 0 auto;
+  padding: 0 16px;
   box-sizing: border-box;
 }
 
@@ -42,33 +42,33 @@ img {
   height: auto;
 }
 
-/* Giriş */
+/* Mobile-First Header Styles */
 .header {
   background-color: #ffffff;
   border-bottom: 1px solid #e7e9fc;
-  padding: 24px 0;
+  padding: 16px 0;
+  position: relative;
 }
 
 .header-wrapper {
-  max-width: 1158px;
+  max-width: 320px;
   margin: 0 auto;
-  padding: 0 12px;
+  padding: 0 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.header-container,
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+}
+
 .contact-container {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.header-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: none; /* Hidden on mobile */
 }
 
 .logo {
@@ -77,26 +77,81 @@ img {
   font-weight: 700;
   text-decoration: none;
   color: #2e2f42;
-  margin-right: 40px;
+  z-index: 1001;
 }
 
 .logo-web {
   color: #4d5ae5;
 }
 
+/* Hamburger Menu Styles */
+.menu-toggle {
+  display: none; /* Hide the checkbox */
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 12px;
+  z-index: 1001;
+  position: relative;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.hamburger:hover {
+  background-color: rgba(77, 90, 229, 0.1);
+}
+
+.hamburger:focus-within {
+  outline: 2px solid #4d5ae5;
+  outline-offset: 2px;
+}
+
+.hamburger-line {
+  width: 24px;
+  height: 3px;
+  background-color: #2e2f42;
+  margin: 2px 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+/* Navigation Menu - Mobile */
+.nav-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100vh;
+  background-color: #ffffff;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .nav-list {
   display: flex;
-  gap: 24px;
+  flex-direction: column;
+  gap: 32px;
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-left: 16px;
+  text-align: center;
 }
 
 .nav-list a {
   text-decoration: none;
   color: #2e2f42;
   font-weight: 500;
+  font-size: 24px;
   transition-property: color;
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -106,45 +161,60 @@ img {
 .nav-list a:hover {
   color: #4d5ae5;
 }
+
 .nav-list a.active::after {
   content: "";
   position: absolute;
   bottom: -4px;
-  left: 0;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
   height: 3px;
   background-color: #4d5ae5;
   border-radius: 2px 2px 0 0;
 }
 
-/* İletişim bilgileri */
+/* Show menu when checkbox is checked */
+.menu-toggle:checked ~ .nav-menu {
+  right: 0;
+}
+
+/* Hamburger animation when menu is open */
+.menu-toggle:checked + .hamburger .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-toggle:checked + .hamburger .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle:checked + .hamburger .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* İletişim bilgileri - Mobile (hidden) */
 .contact-info {
-  display: flex;
-  align-items: center;
-  gap: 24px;
+  display: none;
 }
 
 .contact-info a {
   text-decoration: none;
   color: #434455;
-  margin-left: 24px;
   font-size: 14px;
   transition-property: color;
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  gap: 40px;
 }
 
 .contact-info a:hover {
   color: #4d5ae5;
 }
 
-/* Büyük Başlık */
+/* Mobile-First Hero Section */
 .hero-section {
   position: relative;
-  max-width: 1440px;
   width: 100%;
-  min-height: 600px;
+  min-height: 432px;
   margin: 0 auto;
   background-image: linear-gradient(
       to bottom,
@@ -159,7 +229,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 24px;
+  padding: 72px 16px;
   box-sizing: border-box;
   text-align: center;
   overflow: hidden;
@@ -179,18 +249,20 @@ img {
 .hero-section .container {
   position: relative;
   z-index: 2;
+  max-width: none;
+  padding: 0;
 }
 
 .hero-section h1 {
   font-family: "Roboto", sans-serif;
   font-weight: 700;
-  font-size: 56px;
-  max-width: 600px;
-  line-height: 60px;
+  font-size: 36px;
+  line-height: 40px;
   letter-spacing: 0.02em;
   text-align: center;
-  width: 600px;
-  margin: 0 auto 32px auto;
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto 72px auto;
 }
 
 .cta-button {
@@ -212,34 +284,36 @@ img {
   background-color: #404bbf;
 }
 
-/* Açıklama */
+/* Mobile-First About Section */
 .about-section {
   font-family: "Roboto", sans-serif;
+  padding: 96px 0;
 }
 
 .about-section ul {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 32px;
+  grid-template-columns: 1fr;
+  gap: 72px;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
 .icon-item {
-  text-align: left;
+  text-align: center;
 }
 
 .icon-box {
-  width: 264px;
+  width: 100%;
+  max-width: 264px;
   height: 112px;
   background-color: #f4f4fd;
   border: 1px solid #8e8f99;
   border-radius: 4px;
-  display: flex;
+  display: none; /* Hidden on mobile */
   justify-content: center;
   align-items: center;
-  margin: 0 auto 16px;
+  margin: 0 auto 8px;
 }
 
 .icon {
@@ -831,4 +905,219 @@ textarea {
 
 .submit-btn:hover {
   background: #404bbf;
+}
+
+/* ===== RESPONSIVE MEDIA QUERIES ===== */
+
+/* Tablet Styles - 768px and up */
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 24px;
+  }
+  
+  .header-wrapper {
+    max-width: 768px;
+    padding: 0 24px;
+  }
+  
+  .header {
+    padding: 20px 0;
+  }
+  
+  /* Hamburger still visible on tablet */
+  .hamburger {
+    display: flex;
+  }
+  
+  /* Contact info partially visible on tablet */
+  .contact-container {
+    display: none; /* Keep hidden on tablet for hamburger menu */
+  }
+  
+  /* Hero section adjustments */
+  .hero-section {
+    min-height: 400px;
+    padding: 0 32px;
+  }
+  
+  .hero-section h1 {
+    font-size: 48px;
+    line-height: 52px;
+    max-width: 500px;
+  }
+  
+  /* About section grid adjustments */
+  .about-section ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 72px 24px;
+  }
+  
+  .icon-item {
+    text-align: left;
+  }
+  
+  .icon-box {
+    display: flex; /* Show icon boxes on tablet */
+    width: 100%;
+    max-width: 264px;
+    margin: 0 0 8px 0;
+  }
+  
+  /* Team section adjustments */
+  .team-list {
+    gap: 40px;
+    justify-content: center;
+  }
+  
+  /* Portfolio section adjustments */
+  .portfolio-section ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    max-width: 768px;
+  }
+  
+  .portfolio-section li {
+    width: 100%;
+    max-width: 360px;
+  }
+  
+  /* Footer adjustments */
+  .footer .container {
+    max-width: 768px;
+    padding: 0 24px;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+/* Desktop Styles - 1158px and up */
+@media (min-width: 1158px) {
+  .container {
+    max-width: 1158px;
+    padding: 0 15px;
+  }
+  
+  .header-wrapper {
+    max-width: 1158px;
+    padding: 0 15px;
+  }
+  
+  .header {
+    padding: 24px 0;
+  }
+  
+  .header-container {
+    justify-content: flex-start;
+    gap: 76px;
+  }
+  
+  /* Hide hamburger menu on desktop */
+  .hamburger {
+    display: none;
+  }
+  
+  /* Show full navigation on desktop */
+  .nav-menu {
+    position: static;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    transition: none;
+    z-index: auto;
+    display: block;
+  }
+  
+  .nav-list {
+    flex-direction: row;
+    gap: 40px;
+    text-align: left;
+  }
+  
+  .nav-list a {
+    font-size: 16px;
+  }
+  
+  .nav-list a.active::after {
+    left: 0;
+    transform: none;
+    width: 100%;
+  }
+  
+  /* Show contact info on desktop */
+  .contact-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .contact-info {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  
+  .contact-info a {
+    margin-left: 0;
+    font-size: 16px;
+  }
+  
+  /* Hero section desktop */
+  .hero-section {
+    min-height: 600px;
+    padding: 0 24px;
+  }
+  
+  .hero-section h1 {
+    font-size: 56px;
+    line-height: 60px;
+    max-width: 496px;
+  }
+  
+  /* About section desktop grid */
+  .about-section ul {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  
+  .icon-box {
+    display: flex; /* Show icon boxes on desktop */
+    margin: 0 0 8px 0;
+  }
+  
+  /* Team section desktop */
+  .team-list {
+    gap: 24px;
+    justify-content: center;
+  }
+  
+  /* Portfolio section desktop */
+  .portfolio-section ul {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px 24px;
+    max-width: 1158px;
+  }
+  
+  .portfolio-section li {
+    max-width: 360px;
+  }
+  
+  /* Footer desktop */
+  .footer .container {
+    max-width: 1158px;
+    padding: 0 15px;
+    justify-content: space-between;
+  }
+}
+
+/* High-resolution (Retina) displays */
+@media (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .hero-section {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(46, 47, 66, 0.7),
+        rgba(46, 47, 66, 0.2)
+      ),
+      url("../images/people-office.png"); /* Using same image for now - add @2x version when available */
+  }
 }
